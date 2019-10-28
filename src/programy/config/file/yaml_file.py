@@ -51,6 +51,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
 
     def get_section(self, section_name, parent_section=None):
         """实现的yaml文件获取bot、brain、client三个配置节的内容
+        优先从parent_section同级中获取，如果没有，就从yaml的根开始查找
         """
         if parent_section is None:
             if section_name in self.yaml_data:

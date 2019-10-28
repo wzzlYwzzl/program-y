@@ -51,6 +51,8 @@ class PatternRootNode(PatternNode):
         return "ROOT "
 
     def match(self, client_context, context, words):
+        """结合用户上下文client_context，单次问题的context，来查询words匹配的答案
+        """
         return self.consume(client_context, context, words, 0, Match.WORD, 0)
 
     def _remove_priority(self, userid):

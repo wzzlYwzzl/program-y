@@ -20,7 +20,7 @@ import uuid
 from programy.utils.logging.ylogger import YLogger
 
 class ClientContext(object):
-    """用户请求的上下文
+    """单次用户请求的上下文
     """
     
     def __init__(self, client, userid):

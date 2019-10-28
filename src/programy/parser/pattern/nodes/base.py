@@ -578,7 +578,9 @@ class PatternNode(object):
         return string
 
     def match_children(self, client_context, children, child_type, words, word_no, context, match_type, depth):
-
+        """match_children用于判断当前node是否匹配和consume用于判断子树是否匹配。
+        整个匹配过程是一个递归调用的问题。
+        """
         tabs = self.get_tabs(client_context, depth)
 
         for child in children:
@@ -601,7 +603,8 @@ class PatternNode(object):
         return None, word_no
 
     def consume(self, client_context, context, words, word_no, match_type, depth):
-
+        """子树匹配查询
+        """
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_time_exceeded() is True:
@@ -620,7 +623,7 @@ class PatternNode(object):
                 YLogger.debug(client_context, "%sNo more words and no template, no match found!", tabs)
                 return None
 
-        if self._topic is not None:
+        if self._topic is not None: #如果有主题，那么会在同一主题内找寻匹配
             match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched topic, success!", tabs)
@@ -638,32 +641,38 @@ class PatternNode(object):
                 YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
 
+        # 匹配这一层优先级高的单词，如果匹配则返回匹配内容
         match, word_no = self.match_children(client_context, self._priority_words, "Priority", words, word_no, context, match_type, depth)
         if match is not None:
             return match
 
+        # 匹配sharp符号
         if self._0ormore_hash is not None:
             match = self._0ormore_hash.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched 0 or more hash, success!", tabs)
                 return match
 
+        # 匹配下划线
         if self._1ormore_underline is not None:
             match = self._1ormore_underline.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched 1 or more underline, success!", tabs)
                 return match
 
+        # 匹配单词
         match, word_no = self.match_children(client_context, self._children, "Word", words, word_no, context, match_type, depth)
         if match is not None:
             return match
 
+        # 匹配 ^ 符号
         if self._0ormore_arrow is not None:
             match = self._0ormore_arrow.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 YLogger.debug(client_context, "%sMatched 0 or more arrow, success!", tabs)
                 return match
 
+        # 匹配 * 符号，我们通过这四个符号的解析顺序就可以知道符号的优先级
         if self._1ormore_star is not None:
             match = self._1ormore_star.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:

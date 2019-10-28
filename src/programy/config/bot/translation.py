@@ -22,6 +22,8 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BotTranslatorConfiguration(BaseConfigurationData):
+    """翻译配置
+    """
 
     def __init__(self, name):
         BaseConfigurationData.__init__(self, name=name)

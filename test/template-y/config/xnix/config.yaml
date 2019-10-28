@@ -149,7 +149,7 @@ bot:
     max_question_recursion: 1000
     max_question_timeout: 60
     max_search_depth: 100
-    max_search_timeout: 60
+    max_search_timeout: 600000
 
     spelling:
       load: true
@@ -158,6 +158,9 @@ bot:
       check_before: false
       check_and_retry: false
 
+    joiner:
+      terminator: ""
+    
     conversations:
       save: true
       load: false
@@ -179,7 +182,8 @@ brain:
       default-get: unknown
       default-property: unknown
       default-map: unknown
-
+    
+    # 使用中文Tokenizer
     tokenizer:
       classname: programy.dialog.tokenizer.cjk.CjkTokenizer
 

@@ -8,4 +8,8 @@
         <pattern>你好*</pattern>
         <template>你也好啊！</template>
     </category>
+    <category>
+        <pattern>*大于*的*</pattern>
+        <template>SearchEP("<star index="1"/>"|"&gt;:<star index="2"/>"|"<star index="3"/>"|"{'time':''}")</template>
+    </category>
 </aiml>

@@ -78,16 +78,19 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         return self._responder
 
     def check_for_license_keys(self, license_keys):
-        BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
+        BaseContainerConfigurationData.check_for_license_keys(
+            self, license_keys)
 
     def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         client = configuration_file.get_section(self.section_name)
         if client is None:
-            YLogger.error(None, 'Client section named [%s] not found, trying "client"', self.section_name)
+            YLogger.error(
+                None, 'Client section named [%s] not found, trying "client"', self.section_name)
             client = configuration_file.get_section('client')
 
         if client is not None:
-            self.load_configuration_section(configuration_file, client, bot_root, subs)
+            self.load_configuration_section(
+                configuration_file, client, bot_root, subs)
         else:
             YLogger.error(None, 'No client section not found!')
 
@@ -95,13 +98,15 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
         assert(configuration_file is not None)
 
-        if section is not None: # 这里获取的是client section通用的配置
+        if section is not None:  # 这里获取的是client section通用的配置
             self._description = configuration_file.get_option(section, "description",
                                                               missing_value='ProgramY AIML2.0 Client', subs=subs)
 
-            bot_names = configuration_file.get_multi_option(section, "bot", missing_value="bot", subs=subs)
+            bot_names = configuration_file.get_multi_option(
+                section, "bot", missing_value="bot", subs=subs)
             first = True
             for name in bot_names:
+                # 这里就是用来加载bot配置和brain配置
                 if first is True:
                     config = self._bot_configs[0]
                     first = False
@@ -110,28 +115,37 @@ class ClientConfigurationData(BaseContainerConfigurationData):
                     config = BotConfiguration(name)
                     self._bot_configs.append(config)
 
-                config.load_configuration(configuration_file, bot_root, subs=subs)
+                config.load_configuration(
+                    configuration_file, bot_root, subs=subs)
 
             self._bot_selector = configuration_file.get_option(section, "bot_selector",
                                                                missing_value="programy.clients.client.DefaultBotSelector",
                                                                subs=subs)
 
-            self._scheduler.load_config_section(configuration_file, section, bot_root, subs=subs)
+            self._scheduler.load_config_section(
+                configuration_file, section, bot_root, subs=subs)
 
-            self._storage.load_config_section(configuration_file, section, bot_root, subs=subs)
+            self._storage.load_config_section(
+                configuration_file, section, bot_root, subs=subs)
 
-            self._renderer = configuration_file.get_option(section, "renderer", subs=subs)
+            self._renderer = configuration_file.get_option(
+                section, "renderer", subs=subs)
 
-            self._email.load_config_section(configuration_file, section, bot_root, subs=subs)
+            self._email.load_config_section(
+                configuration_file, section, bot_root, subs=subs)
 
-            self._triggers.load_config_section(configuration_file, section, bot_root, subs=subs)
+            self._triggers.load_config_section(
+                configuration_file, section, bot_root, subs=subs)
 
-            self._responder.load_config_section(configuration_file, section, bot_root, subs=subs)
+            self._responder.load_config_section(
+                configuration_file, section, bot_root, subs=subs)
 
         else:
-            YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
+            YLogger.warning(
+                self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
             self._bot_configs[0]._section_name = "bot"
-            self._bot_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
+            self._bot_configs[0].load_configuration(
+                configuration_file, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
 

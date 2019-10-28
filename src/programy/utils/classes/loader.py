@@ -19,6 +19,8 @@ from programy.utils.logging.ylogger import YLogger
 import importlib
 
 class ClassLoader(object):
+    """动态import module，然后通过getattr来获取module的class对象
+    """
 
     @staticmethod
     def instantiate_class(class_string):

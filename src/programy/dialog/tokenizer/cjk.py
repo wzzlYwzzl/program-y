@@ -50,10 +50,14 @@ class CjkTokenizer(Tokenizer):
         return any(s <= ord(c) <= e for s, e in r)
 
     def _is_wildchar(self, ch):
+        """判断是否是aiml支持的通配符
+        """
         MATCH_CHARS = ['^', '#', '', '*']
         return bool(ch in MATCH_CHARS)
 
     def texts_to_words(self, texts):
+        """标点符号也附属于单词中
+        """
         if not texts:
             return []
 

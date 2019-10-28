@@ -29,6 +29,8 @@ from programy.utils.substitutions.substitues import Substitutions
 
 
 class BotConfiguration(BaseContainerConfigurationData):
+    """聊天机器人的配置项，其中包含了Brain的配置
+    """
 
     DEFAULT_ROOT = "."
     DEFAULT_RESPONSE = ""
@@ -66,7 +68,8 @@ class BotConfiguration(BaseContainerConfigurationData):
         self._max_search_timeout = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
         self._tab_parse_output = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
         self._spelling = BotSpellingConfiguration()
-        self._from_translator = BotTranslatorConfiguration(name="from_translator")
+        self._from_translator = BotTranslatorConfiguration(
+            name="from_translator")
         self._to_translator = BotTranslatorConfiguration(name="to_translator")
         self._sentiment = BotSentimentAnalyserConfiguration()
         self._conversations = BotConversationsConfiguration()
@@ -75,18 +78,21 @@ class BotConfiguration(BaseContainerConfigurationData):
         BaseContainerConfigurationData.__init__(self, section_name)
 
     def check_for_license_keys(self, license_keys):
-        BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
+        BaseContainerConfigurationData.check_for_license_keys(
+            self, license_keys)
 
     def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         bot = configuration_file.get_section(self.section_name)
         if bot is not None:
 
+            # 默认的回答
             self._default_response = configuration_file.get_option(bot, "default_response",
                                                                    BotConfiguration.DEFAULT_RESPONSE, subs=subs)
             self._default_response_srai = configuration_file.get_option(bot, "default_response_srai",
                                                                         BotConfiguration.DEFAULT_RESPONSE_SRAI, subs=subs)
             self._empty_string = configuration_file.get_option(bot, "empty_string",
                                                                BotConfiguration.DEFAULT_EMPTY_STRING, subs=subs)
+            # 退出时的响应
             self._exit_response = configuration_file.get_option(bot, "exit_response",
                                                                 BotConfiguration.DEFAULT_EXIT_RESPONSE, subs=subs)
             self._exit_response_srai = configuration_file.get_option(bot, "exit_response_srai",
@@ -107,29 +113,41 @@ class BotConfiguration(BaseContainerConfigurationData):
                                                                          BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT, subs=subs)
             self._tab_parse_output = configuration_file.get_bool_option(bot, "tab_parse_output",
                                                                         BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT, subs=subs)
+            # spelling配置section
+            self._spelling.load_config_section(
+                configuration_file, bot, bot_root, subs=subs)
 
-            self._spelling.load_config_section(configuration_file, bot, bot_root, subs=subs)
+            # conversations配置section
+            self._conversations.load_config_section(
+                configuration_file, bot, bot_root, subs=subs)
 
-            self._conversations.load_config_section(configuration_file, bot, bot_root, subs=subs)
+            # splitterpe配置section
+            self._splitter.load_config_section(
+                configuration_file, bot, bot_root, subs=subs)
 
-            self._splitter.load_config_section(configuration_file, bot, bot_root, subs=subs)
+            # joiner配置section
+            self._joiner.load_config_section(
+                configuration_file, bot, bot_root, subs=subs)
 
-            self._joiner.load_config_section(configuration_file, bot, bot_root, subs=subs)
+            self._from_translator.load_config_section(
+                configuration_file, bot, bot_root, subs=subs)
 
-            self._from_translator.load_config_section(configuration_file, bot, bot_root, subs=subs)
+            self._to_translator.load_config_section(
+                configuration_file, bot, bot_root, subs=subs)
 
-            self._to_translator.load_config_section(configuration_file, bot, bot_root, subs=subs)
-
-            self._sentiment.load_config_section(configuration_file, bot, bot_root, subs=subs)
+            self._sentiment.load_config_section(
+                configuration_file, bot, bot_root, subs=subs)
 
         else:
-            YLogger.warning(self, "Config section [%s] missing, using default values", self.section_name)
+            YLogger.warning(
+                self, "Config section [%s] missing, using default values", self.section_name)
 
         self.load_configurations(configuration_file, bot, bot_root, subs)
 
     def load_configurations(self, configuration_file, bot, bot_root, subs: Substitutions = None):
         if bot is not None:
-            brain_names = configuration_file.get_multi_option(bot, "brain", missing_value="brain")
+            brain_names = configuration_file.get_multi_option(
+                bot, "brain", missing_value="brain")
             first = True
             for name in brain_names:
                 if first is True:
@@ -138,15 +156,19 @@ class BotConfiguration(BaseContainerConfigurationData):
                 else:
                     config = BrainConfiguration(name)
                     self._brain_configs.append(config)
-                config.load_configuration(configuration_file, bot_root, subs=subs)
+                config.load_configuration(
+                    configuration_file, bot_root, subs=subs)
 
-                self._brain_selector = configuration_file.get_option(bot, "brain_selector", subs=subs)
+                self._brain_selector = configuration_file.get_option(
+                    bot, "brain_selector", subs=subs)
 
         else:
-            YLogger.warning(self, "No brain name defined for bot [%s], defaulting to 'brain'.", self.section_name)
+            YLogger.warning(
+                self, "No brain name defined for bot [%s], defaulting to 'brain'.", self.section_name)
             brain_name = "brain"
             self._brain_configs[0]._section_name = brain_name
-            self._brain_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
+            self._brain_configs[0].load_configuration(
+                configuration_file, bot_root, subs=subs)
 
     @property
     def configurations(self):
@@ -292,6 +314,9 @@ class BotConfiguration(BaseContainerConfigurationData):
         self.config_to_yaml(data, BotConversationsConfiguration(), defaults)
         self.config_to_yaml(data, BotSentenceSplitterConfiguration(), defaults)
         self.config_to_yaml(data, BotSentenceJoinerConfiguration(), defaults)
-        self.config_to_yaml(data, BotTranslatorConfiguration(name="from_translator"), defaults)
-        self.config_to_yaml(data, BotTranslatorConfiguration(name="to_translator"), defaults)
-        self.config_to_yaml(data, BotSentimentAnalyserConfiguration(), defaults)
+        self.config_to_yaml(data, BotTranslatorConfiguration(
+            name="from_translator"), defaults)
+        self.config_to_yaml(data, BotTranslatorConfiguration(
+            name="to_translator"), defaults)
+        self.config_to_yaml(
+            data, BotSentimentAnalyserConfiguration(), defaults)
