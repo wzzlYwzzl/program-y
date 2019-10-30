@@ -2,7 +2,9 @@
 <aiml version="2.0">
     <category>
         <pattern>HELLO</pattern>
-        <template>Hi there!</template>
+        <template>
+        <think><set name="topic">fishing</set></think>
+        Hi there!</template>
     </category>
     <category>
         <pattern>你好*</pattern>
@@ -12,4 +14,43 @@
         <pattern>*大于*的*</pattern>
         <template>SearchEP("<star index="1"/>"|"&gt;:<star index="2"/>"|"<star index="3"/>"|"{'time':''}")</template>
     </category>
+    <category>
+        <pattern>HELLO FRIEND #</pattern>
+        <template>Hi there, friend!</template>
+    </category>
+    <category>
+        <pattern>HELLO *</pattern>
+        <template>Hi there!</template>
+    </category>
+    <category>
+    <pattern> I LIKE THE COLOR <set name="colors" /></pattern>
+    <topic>FISHING</topic>
+    <template>
+        That is great, I like that color <star /> too.
+    </template>
+</category>
+<category>
+    <pattern>MY NAME IS *</pattern>
+    <template>
+        <set name="myname"><star /></set>
+    </template>
+</category>
+<category>
+    <pattern>WHAT IS THE DATE</pattern>
+    <template>
+        Today is <date><format>%B %d, %Y</format></date>
+    </template>
+</category>
+<category>
+    <pattern>MY NAME IS * * </pattern>
+    <template>
+        Hello Mr <formal><star /></formal> <formal><star index="2"/></formal>
+    </template>
+</category>
+<category>
+    <pattern>WHAT NOISE DOES A * MAKE</pattern>
+    <template>
+       A <star/> says <map name="animalsounds"><star /></map>
+    </template>
+</category>
 </aiml>

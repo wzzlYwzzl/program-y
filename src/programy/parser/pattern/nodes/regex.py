@@ -96,6 +96,8 @@ class PatternRegexNode(PatternNode):
         return False
 
     def equals(self, client_context, words, word_no):
+        """这里的equals只会和单个单词进行比较
+        """
         word = words.word(word_no)
 
         if self.userid != '*':

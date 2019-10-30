@@ -42,6 +42,8 @@ class PatternISetNode(PatternNode):
         PatternISetNode.iset_count += 1
 
     def _parse_words(self, words):
+        """根据逗号分隔iset中指定的单词
+        """
         splits = words.split(",")
         for word in splits:
             self._words.append(word.strip().upper())

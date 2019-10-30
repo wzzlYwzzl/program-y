@@ -131,7 +131,7 @@ console:
 
 
 #####################################################################################################
-#
+
 
 bot:
     brain: brain
@@ -147,7 +147,7 @@ bot:
     override_properties: true
 
     max_question_recursion: 1000
-    max_question_timeout: 60
+    max_question_timeout: 6000000
     max_search_depth: 100
     max_search_timeout: 600000
 
@@ -167,7 +167,7 @@ bot:
 
 
 #####################################################################################################
-#
+
 
 brain:
 

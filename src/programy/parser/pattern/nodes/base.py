@@ -583,7 +583,7 @@ class PatternNode(object):
         """
         tabs = self.get_tabs(client_context, depth)
 
-        for child in children:
+        for child in children: # 这里是遍历比较是否相等，随着量逐渐变大，可以优化这里的查找速度
 
             result = child.equals(client_context, words, word_no)
             if result.matched is True:
