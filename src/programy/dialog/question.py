@@ -20,7 +20,7 @@ from programy.dialog.sentence import Sentence
 class Question(object):
 
     @staticmethod
-    def create_from_text(client_context, text, split=True, srai=False):
+    def create_from_text(client_context, text, split=False, srai=False):
         question = Question(srai)
         if split is True:
             question.split_into_sentences(client_context, text)

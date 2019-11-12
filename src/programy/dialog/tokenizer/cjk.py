@@ -73,6 +73,11 @@ class CjkTokenizer(Tokenizer):
                 if len(last_word) > 0:
                     words.append(last_word)
                     last_word = ''
+            elif not ch.isalnum():
+                if len(last_word) > 0:
+                    words.append(last_word)
+                    last_word = ''
+                words.append(ch)
             else:
                 if self._is_wildchar(ch):
                     if len(last_word) > 0:
@@ -93,15 +98,25 @@ class CjkTokenizer(Tokenizer):
         if words is None:
             words = ''
 
+        pre_word = ''
         for word in words:
             if CjkTokenizer._is_chinese_word(word):
                 texts += word
+                pre_word = word
+            elif not word.isalnum():
+                texts += word
+                pre_word = word
+            elif word.isalnum() and not pre_word.isalnum():
+                texts += word
+                pre_word = word
             elif len(texts) > 0:
                 texts += ' ' + word
+                pre_word = word
             elif word is None:
                 pass
             else:
                 texts += word
+                pre_word = word
 
         texts = re.sub(r'\s+', ' ', texts)
         stripped_text = texts.strip()
