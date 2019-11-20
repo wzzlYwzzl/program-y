@@ -98,15 +98,15 @@ class CjkTokenizer(Tokenizer):
         if words is None:
             words = ''
 
-        pre_word = ''
+        pre_word = ' '
         for word in words:
             if CjkTokenizer._is_chinese_word(word):
                 texts += word
                 pre_word = word
-            elif not word.isalnum():
+            elif not word[0].isalnum():
                 texts += word
                 pre_word = word
-            elif word.isalnum() and not pre_word.isalnum():
+            elif word[0].isalnum() and not pre_word[0].isalnum():
                 texts += word
                 pre_word = word
             elif len(texts) > 0:
