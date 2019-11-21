@@ -95,19 +95,22 @@ class ClientConfigurationData(BaseContainerConfigurationData):
             YLogger.error(None, 'No client section not found!')
 
     def load_configuration_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
-
+        """加载client section中的内容，比如console section中的内容。
+        """
         assert(configuration_file is not None)
 
         if section is not None:  # 这里获取的是client section通用的配置
             self._description = configuration_file.get_option(section, "description",
                                                               missing_value='ProgramY AIML2.0 Client', subs=subs)
 
+            # 读取配置文件中定义的bot的名字，list
             bot_names = configuration_file.get_multi_option(
                 section, "bot", missing_value="bot", subs=subs)
             first = True
             for name in bot_names:
                 # 这里就是用来加载bot配置和brain配置
                 if first is True:
+                    # 要求配置文件中必须有一个section名字是bot的配置节
                     config = self._bot_configs[0]
                     first = False
 
@@ -118,25 +121,36 @@ class ClientConfigurationData(BaseContainerConfigurationData):
                 config.load_configuration(
                     configuration_file, bot_root, subs=subs)
 
+            """为什么会有多个bot，为什么需要bot_selector？
+            按照目前的理解，通过多个bot可以是回答的问题不会因为每次问题相同而结果一样，为了应对这种场景。
+            """
+
+            # 读取client中的bot_selector配置项
             self._bot_selector = configuration_file.get_option(section, "bot_selector",
                                                                missing_value="programy.clients.client.DefaultBotSelector",
                                                                subs=subs)
 
+            # 读取schedular配置section
             self._scheduler.load_config_section(
                 configuration_file, section, bot_root, subs=subs)
 
+            # 读取storage配置section
             self._storage.load_config_section(
                 configuration_file, section, bot_root, subs=subs)
 
+            # 读取renderer配置项，renderer的作用就是对结果进行渲染包装。
             self._renderer = configuration_file.get_option(
                 section, "renderer", subs=subs)
 
+            # 读取email配置节
             self._email.load_config_section(
                 configuration_file, section, bot_root, subs=subs)
 
+            # 读取trigger配置节
             self._triggers.load_config_section(
                 configuration_file, section, bot_root, subs=subs)
 
+            # 读取responder配置节，responder健康状况的监听器，接受外界ping请求。
             self._responder.load_config_section(
                 configuration_file, section, bot_root, subs=subs)
 

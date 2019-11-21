@@ -281,6 +281,8 @@ class SchedulerConfiguration(BaseConfigurationData):
         return self._job_defaults
 
     def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        """
+        """
         scheduler = configuration_file.get_section(self._section_name, configuration)
         if scheduler is not None:
             self._name = configuration_file.get_option(scheduler, "name", missing_value=None)
@@ -288,6 +290,7 @@ class SchedulerConfiguration(BaseConfigurationData):
             self._add_listeners = configuration_file.get_bool_option(scheduler, "add_listeners", missing_value=False)
             self._remove_all_jobs = configuration_file.get_bool_option(scheduler, "remove_all_jobs", missing_value=False)
 
+            # 后面的这些配置项都是在scheduler配置节下面。
             if 'jobstore' in scheduler:
                 self._jobstore = SchedulerJobStoreConfiguration()
                 self._jobstore.load_config_section(configuration_file, scheduler, bot_root)
