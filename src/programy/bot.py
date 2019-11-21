@@ -29,6 +29,8 @@ from programy.brainfactory import BrainFactory
 
 
 class Bot(object):
+    """一个聊天机器人对应一个Bot类
+    """
 
     def __init__(self, config, client):
 

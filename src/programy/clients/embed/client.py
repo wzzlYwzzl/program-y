@@ -21,7 +21,7 @@ from programy.config.programy import ProgramyConfiguration
 from programy.clients.args import CommandLineClientArguments
 
 
-class MyEmbeddedBot(ConsoleBotClient):
+class EmbeddedBot(ConsoleBotClient):
     """嵌入到其他程序中时，使用这个Client
     """
 
@@ -46,7 +46,7 @@ class MyEmbeddedBot(ConsoleBotClient):
 
 if __name__ == '__main__':
 
-    my_bot = MyEmbeddedBot(sys.argv[1])
+    my_bot = EmbeddedBot(sys.argv[1])
 
     client_context = my_bot.create_client_context("testuser")
 
