@@ -79,9 +79,6 @@ class FileStorageConfiguration(BaseConfigurationData):
         self._variables_storage = FileStoreConfiguration(
             dirs=[tmpdir + os.sep + "variables"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 
-        self._twitter_storage = FileStoreConfiguration(
-            dirs=[tmpdir + os.sep + "twitter"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
-
         self._spelling_storage = FileStoreConfiguration(
             file=tmpdir + os.sep + "spelling/corpus.txt", format="text", encoding="utf-8", delete_on_start=False)
 
@@ -177,10 +174,6 @@ class FileStorageConfiguration(BaseConfigurationData):
     @property
     def defaults_storage(self):
         return self._defaults_storage
-
-    @property
-    def twitter_storage(self):
-        return self._twitter_storage
 
     @property
     def spelling_storage(self):
@@ -279,9 +272,6 @@ class FileStorageConfiguration(BaseConfigurationData):
             self.load_storage_config(self._defaults_storage, FileStore.DEFAULTS_STORAGE,
                                      configuration_file, storage, bot_root, subs=subs)
 
-            self.load_storage_config(self._twitter_storage, FileStore.TWITTER_STORAGE,
-                                     configuration_file, storage, bot_root, subs=subs)
-
             self.load_storage_config(self._spelling_storage, FileStore.SPELLING_STORAGE,
                                      configuration_file, storage, bot_root, subs=subs)
 
@@ -355,8 +345,6 @@ class FileStorageConfiguration(BaseConfigurationData):
         amap[FileStore.VARIABLES_STORAGE] = self._variables_storage
         amap[FileStore.DEFAULTS_STORAGE] = self._defaults_storage
 
-        amap[FileStore.TWITTER_STORAGE] = self._twitter_storage
-
         amap[FileStore.SPELLING_STORAGE] = self._spelling_storage
 
         amap[FileStore.LICENSE_STORAGE] = self._license_storage
@@ -418,9 +406,6 @@ class FileStorageConfiguration(BaseConfigurationData):
                                                                   encoding="utf-8", delete_on_start=False)
         amap[FileStore.VARIABLES_STORAGE] = FileStoreConfiguration(dirs=[tmpdir + os.sep + "variables"], extension="txt", subdirs=False,
                                                                    format="text", encoding="utf-8", delete_on_start=False)
-
-        amap[FileStore.TWITTER_STORAGE] = FileStoreConfiguration(dirs=[tmpdir + os.sep + "twitter"], extension="txt", subdirs=False,
-                                                                 format="text", encoding="utf-8", delete_on_start=False)
 
         amap[FileStore.SPELLING_STORAGE] = FileStoreConfiguration(file=tmpdir + os.sep + "spelling/corpus.txt", format="text",
                                                                   encoding="utf-8", delete_on_start=False)

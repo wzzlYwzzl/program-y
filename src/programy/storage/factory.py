@@ -46,8 +46,6 @@ class StorageFactory(object):
     DEFAULTS = "defaults"
     VARIABLES = "variables"
 
-    TWITTER = "twitter"
-
     SPELLING_CORPUS = "spelling_corpus"
     LICENSE_KEYS = "license_keys"
 

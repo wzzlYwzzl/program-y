@@ -47,8 +47,6 @@ from programy.storage.stores.sql.store.errors import SQLErrorsStore
 
 from programy.storage.stores.sql.store.duplicates import SQLDuplicatesStore
 
-from programy.storage.stores.sql.store.twitter import SQLTwitterStore
-
 from programy.storage.stores.sql.store.spelling import SQLSpellingStore
 
 from programy.storage.stores.sql.store.licensekeys import SQLLicenseKeysStore
@@ -128,9 +126,6 @@ class SQLStorageEngine(StorageEngine):
         return SQLPropertyStore(self)
     def defaults_store(self):
         return SQLDefaultVariableStore(self)
-
-    def twitter_store(self):
-        return SQLTwitterStore(self)
 
     def spelling_store(self):
         return SQLSpellingStore(self)

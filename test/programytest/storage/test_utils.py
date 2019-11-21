@@ -54,12 +54,4 @@ class StorageEngineTestUtils(unittest.TestCase):
         category_store.store_category(groupid="group1", userid="keiffster", topic="*", that=None, pattern="Hello", template="Hi there!")
         category_store.commit()
 
-    def twitter_asserts(self, storage_engine, visit=True):
-        twitter_store = storage_engine.twitter_store()
-        twitter_store.store_last_message_ids(1, 2)
-        twitter_store.commit()
-
-        last_direct_message_id, last_status_id = twitter_store.load_last_message_ids()
-        self.assertEqual(1, int(last_direct_message_id))
-        self.assertEqual(2, int(last_status_id))
 

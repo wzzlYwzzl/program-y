@@ -85,9 +85,6 @@ class StorageEngine(object):
     def variables_store(self):
         raise NotImplementedError("Engine does not support variables storage")
 
-    def twitter_store(self):
-        raise NotImplementedError("Engine does not support twitter storage")
-
     def spelling_store(self):
         raise NotImplementedError("Engine does not support spelling storage")
 

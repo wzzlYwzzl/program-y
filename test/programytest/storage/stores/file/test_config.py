@@ -35,8 +35,6 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(config.properties_storage)
         self.assertIsNotNone(config.defaults_storage)
 
-        self.assertIsNotNone(config.twitter_storage)
-
         self.assertIsNotNone(config.spelling_storage)
         self.assertIsNotNone(config.license_storage)
 
@@ -150,14 +148,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
                       extension: txt
                       format: text
                       encoding: utf-8                 
-                      delete_on_start: false            
-                      
-                    twitter_storage:
-                      dirs: ./storage/twitter
-                      extension: txt
-                      format: text
-                      encoding: utf-8                 
-                      delete_on_start: false            
+                      delete_on_start: false                       
                       
                     spelling_storage:
                       file: ./storage/spelling/corpus.txt
@@ -236,8 +227,6 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assert_config(config.properties_storage, file="./storage/properties.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(config.defaults_storage, file="./storage/defaults.txt", format="text", encoding="utf-8", delete_on_start=False)
 
-        self.assert_config(config.twitter_storage, dirs=["./storage/twitter"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
-
         self.assert_config(config.spelling_storage, file="./storage/spelling/corpus.txt", format="text", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(config.license_storage, file="./storage/licenses/license.keys", format="text", encoding="utf-8", delete_on_start=False)
@@ -286,8 +275,6 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assert_config(config.properties_storage, file=tmpdir + os.sep + "properties.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(config.defaults_storage, file=tmpdir + os.sep + "defaults.txt", format="text", encoding="utf-8", delete_on_start=False)
 
-        self.assert_config(config.twitter_storage, dirs=[tmpdir + os.sep + "twitter"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
-
         self.assert_config(config.spelling_storage, file=tmpdir + os.sep + "spelling/corpus.txt", format="text", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(config.license_storage, file=tmpdir + os.sep + "licenses/license.keys", format="text", encoding="utf-8", delete_on_start=False)
@@ -330,8 +317,6 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assert_config(amap['properties_storage'], file=tmpdir + os.sep + "properties.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(amap['defaults_storage'], file=tmpdir + os.sep + "defaults.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(amap['variables_storage'], dirs=[tmpdir + os.sep + "variables"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
-
-        self.assert_config(amap['twitter_storage'], dirs=[tmpdir + os.sep + "twitter"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(amap['spelling_storage'], file=tmpdir + os.sep + "spelling/corpus.txt", format="text", encoding="utf-8", delete_on_start=False)
 

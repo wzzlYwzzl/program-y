@@ -289,7 +289,8 @@ class Bot(object):
             return Question.create_from_text(client_context, pre_processed, split=False, srai=srai)
 
     def combine_answers(self, answers, srai):
-
+        """将多个answer进行拼接
+        """
         assert (answers is not None)
         assert (self._sentence_joiner is not None)
 
@@ -327,7 +328,8 @@ class Bot(object):
             responselogger.log_response(text, answer)
 
     def ask_question(self, client_context, text, srai=False, responselogger=None):
-
+        """bot中回答问题的入口方法。
+        """
         assert (client_context is not None)
 
         if srai is False:
@@ -403,7 +405,8 @@ class Bot(object):
             return self.handle_none_response(client_context, sentence, responselogger)
 
     def handle_response(self, client_context, sentence, response, srai, responselogger):
-
+        """得到response之后，对response进行后续的处理。
+        """
         assert (sentence is not None)
 
         YLogger.debug(client_context, "Raw Response (%s): %s", client_context.userid, response)

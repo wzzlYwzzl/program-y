@@ -36,8 +36,6 @@ from programy.storage.stores.nosql.mongo.store.properties import MongoPropertySt
 from programy.storage.stores.nosql.mongo.store.properties import MongoDefaultVariablesStore
 from programy.storage.stores.nosql.mongo.store.properties import MongoRegexesStore
 
-from programy.storage.stores.nosql.mongo.store.twitter import MongoTwitterStore
-
 from programy.storage.stores.nosql.mongo.store.sets import MongoSetsStore
 from programy.storage.stores.nosql.mongo.store.maps import MongoMapsStore
 from programy.storage.stores.nosql.mongo.store.rdfs import MongoRDFsStore
@@ -114,9 +112,6 @@ class MongoStorageEngine(StorageEngine):
         return MongoDefaultVariablesStore(self)
     def regex_store(self):
         return MongoRegexesStore(self)
-
-    def twitter_store(self):
-        return MongoTwitterStore(self)
 
     def spelling_store(self):
         return MongoSpellingStore(self)

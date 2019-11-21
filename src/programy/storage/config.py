@@ -179,7 +179,6 @@ class StorageConfiguration(BaseConfigurationData):
         amap[StorageFactory.DEFAULTS] = 'file'
         amap[StorageFactory.VARIABLES] = 'file'
 
-        amap[StorageFactory.TWITTER] = 'file'
 
         amap[StorageFactory.SPELLING_CORPUS] = 'file'
 

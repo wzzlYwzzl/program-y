@@ -41,8 +41,6 @@ class StorageConfigurationTests(unittest.TestCase):
                     variables: file
                     defaults: file
 
-                    twitter: file
-
                     spelling_corpus: file
 
                     license_keys: file
@@ -158,8 +156,6 @@ class StorageConfigurationTests(unittest.TestCase):
 
         self.assertEqual(storage_config.entity_store[StorageFactory.PROPERTIES], 'file')
         self.assertEqual(storage_config.entity_store[StorageFactory.DEFAULTS], 'file')
-
-        self.assertEqual(storage_config.entity_store[StorageFactory.TWITTER], 'file')
 
         self.assertEqual(storage_config.entity_store[StorageFactory.SPELLING_CORPUS], 'file')
 

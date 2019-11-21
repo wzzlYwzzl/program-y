@@ -19,7 +19,6 @@ from programy.storage.engine import StorageEngine
 from programy.storage.stores.file.store.properties import FilePropertyStore
 from programy.storage.stores.file.store.properties import FileDefaultVariablesStore
 from programy.storage.stores.file.store.conversations import FileConversationStore
-from programy.storage.stores.file.store.twitter import FileTwitterStore
 from programy.storage.stores.file.store.sets import FileSetsStore
 from programy.storage.stores.file.store.maps import FileMapsStore
 from programy.storage.stores.file.store.rdfs import FileRDFStore
@@ -102,9 +101,6 @@ class FileStorageEngine(StorageEngine):
 
     def defaults_store(self):
         return FileDefaultVariablesStore(self)
-
-    def twitter_store(self):
-        return FileTwitterStore(self)
 
     def spelling_store(self):
         return FileSpellingStore(self)

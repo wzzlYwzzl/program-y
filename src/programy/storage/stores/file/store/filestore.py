@@ -47,8 +47,6 @@ class FileStore(Store):
     VARIABLES_STORAGE = 'variables_storage'
     DEFAULTS_STORAGE = 'defaults_storage'
 
-    TWITTER_STORAGE = 'twitter_storage'
-
     SPELLING_STORAGE = 'spelling_storage'
 
     LICENSE_STORAGE = 'license_storage'

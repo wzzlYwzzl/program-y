@@ -3,17 +3,7 @@ import yaml
 
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.clients.events.tcpsocket.config import SocketConfiguration
-from programy.clients.polling.slack.config import SlackConfiguration
-from programy.clients.polling.telegram.config import TelegramConfiguration
-from programy.clients.polling.twitter.config import TwitterConfiguration
-from programy.clients.polling.xmpp.config import XmppConfiguration
 from programy.clients.restful.config import RestConfiguration
-from programy.clients.restful.flask.facebook.config import FacebookConfiguration
-from programy.clients.restful.flask.kik.config import KikConfiguration
-from programy.clients.restful.flask.line.config import LineConfiguration
-from programy.clients.restful.flask.twilio.config import TwilioConfiguration
-from programy.clients.restful.flask.viber.config import ViberConfiguration
-from programy.clients.restful.sanic.config import SanicRestConfiguration
 
 
 class ConfigurationWriter(object):
@@ -38,38 +28,8 @@ class ConfigurationWriter(object):
         if 'all' in args.clients or 'socket' in args.clients:
             self.add_to_config(config_data, SocketConfiguration(), args.defaults)
 
-        if 'all' in args.clients or 'slack' in args.clients:
-            self.add_to_config(config_data, SlackConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'telegram' in args.clients:
-            self.add_to_config(config_data, TelegramConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'twitter' in args.clients:
-            self.add_to_config(config_data, TwitterConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'xmpp' in args.clients:
-            self.add_to_config(config_data, XmppConfiguration(), args.defaults)
-
         if 'all' in args.clients or 'rest' in args.clients:
             self.add_to_config(config_data, RestConfiguration(name="rest"))
-
-        if 'all' in args.clients or 'facebook' in args.clients:
-            self.add_to_config(config_data, FacebookConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'kik' in args.clients:
-            self.add_to_config(config_data, KikConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'line' in args.clients:
-            self.add_to_config(config_data, LineConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'twilio' in args.clients:
-            self.add_to_config(config_data, TwilioConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'viber' in args.clients:
-            self.add_to_config(config_data, ViberConfiguration(), args.defaults)
-
-        if 'all' in args.clients or 'sanic' in args.clients:
-            self.add_to_config(config_data, SanicRestConfiguration(name="sanic"))
 
         client_config = ConsoleConfiguration()
 

@@ -106,7 +106,6 @@ console:
           gender: file
           person: file
           person2: file
-          twitter: file
           spelling_corpus: file
           license_keys: file
           nodes: file
@@ -177,8 +176,6 @@ console:
                   files: ./storage/rdfs
                   extension: .txt
                   directories: true
-                twitter_storage:
-                  files: ./storage/twitter
                 spelling_corpus:
                   file: ./storage/spelling/corpus.txt
                 license_keys:
@@ -231,17 +228,6 @@ webchat:
   debug: false
   license_keys: $BOT_ROOT/config/license.keys
   api: /api/web/v1.0/ask
-
-twitter:
-  polling: true
-  polling_interval: 49
-  streaming: false
-  use_status: true
-  use_direct_message: true
-  auto_follow: true
-  storage: file
-  welcome_message: Thanks for following me, send me a message and I'll try and help
-  license_keys: file
 
 xmpp:
   server: talk.google.com

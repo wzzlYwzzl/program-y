@@ -33,8 +33,6 @@ webchat:
           properties: file
           variables: file
 
-          twitter: file
-
           spelling_corpus: file
           license_keys: file
 
@@ -98,9 +96,6 @@ webchat:
                   file: ..\..\storage\properties\defaults.txt
                 variables_storage:
                   dirs: ..\..\storage\variables
-
-                twitter_storage:
-                  dirs: ..\..\storage\twitter
 
                 spelling_storage:
                   file: ..\..\storage\spelling\corpus.txt

@@ -122,12 +122,6 @@ class StorageEngineTests(unittest.TestCase):
         with self.assertRaises(NotImplementedError):
             _ = engine.property_store()
 
-    def test_twitter_store_not_implemented(self):
-        config = unittest.mock.Mock()
-        engine = StorageEngine(config)
-        with self.assertRaises(NotImplementedError):
-            _ = engine.twitter_store()
-
     def test_spelling_store_not_implemented(self):
         config = unittest.mock.Mock()
         engine = StorageEngine(config)
