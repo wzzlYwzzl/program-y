@@ -22,8 +22,8 @@ class TextUtils:
 
     DEFAULT_TAB_SPACE = "  "
 
-    RE_STRIP_ALL_WHITESPACE = re.compile('[\s+]')
-    RE_STRIP_WHITESPACE = re.compile('[\n\t\r+]')
+    RE_STRIP_ALL_WHITESPACE = re.compile('[\s]+')
+    RE_STRIP_WHITESPACE = re.compile('[\n\t\r]+')
     RE_TERMIANTORS = re.compile('[:;,.?!]')
     RE_STRIP_NONE_TERMINATING = re.compile('[\'"\(\)\-"]')
     RE_STRIP_ALL_PUNCTUATION1 = re.compile('[:\'";,.?!\(\)\-"]')
